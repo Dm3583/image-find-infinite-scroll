@@ -1,1 +1,1 @@
-# page-find-infinite-scroll
+# image-find-infinite-scroll

@@ -1,0 +1,26 @@
+{
+  "name": "image-find-infinite-scroll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "webpack --mode=production",
+    "dev": "webpack --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dm3583/image-find-infinite-scroll.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dm3583/image-find-infinite-scroll/issues"
+  },
+  "homepage": "https://github.com/Dm3583/image-find-infinite-scroll#readme",
+  "devDependencies": {
+    "mini-css-extract-plugin": "^1.3.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^4.3.1"
+  }
+}
