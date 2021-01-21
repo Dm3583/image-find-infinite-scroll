@@ -1,6 +1,3 @@
-import str from './module-1';
-import './css/common.scss';
-import '../src/js/test'
+import './scss/main.scss';
+import './js/searchInterface';
 
-console.log(str);
-console.log("hello")

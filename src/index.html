@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Search images</title>
 </head>
 
 <body>
 
-    <div class="search-wrapper">
-        <input type="text" name="query" id="query">
-        <button class="searchBtn">
-            <span class="label"></span>
-        </button>
+    <div class="search-form-wrapper">
+        <form class="search-form" id="search-form">
+            <input type="text" name="query" id="query" autocomplete="off" placeholder="Search images...">
+            <button typ class="searchBtn">
+                <span class="label"></span>
+            </button>
+        </form>
     </div>
 
     <ul class="gallery"></ul>
