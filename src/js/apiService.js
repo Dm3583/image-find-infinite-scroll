@@ -13,7 +13,7 @@ export default class ApiService {
             .then(res => res.json())
             .then(data => {
                 this.incrementPage();
-                console.log(data);
+                console.log("DATA in API", data);
                 return data;
             })
     };

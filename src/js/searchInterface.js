@@ -11,7 +11,7 @@ const searchBtn = new Button({
     labelOnStateChange: 'Searching....'
 });
 
-let observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries, observer) => {
 
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -19,26 +19,20 @@ let observer = new IntersectionObserver((entries, observer) => {
             observer.unobserve(entry.target);
             fetchResults();
             return;
-        }
-    })
+        };
+    });
 }, {
     threshold: 1
 });
 
 function isEmptyString(inp) {
-    console.log(inp);
-    let res = (!inp ||
-        inp.match(/\s+/) &&
-        !inp.match(/\s+\w+/)) ?
-        true : false;
-    console.log(res);
-    return res;
+    return (!inp || inp.match(/\s+/) && !inp.match(/\s+\w+/));
 };
 
 function renderMarkup(template, data) {
     const markup = template(data);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
-}
+};
 
 function clear(element) {
     element.innerHTML = "";
@@ -52,12 +46,15 @@ function scrollDown(amount) {
     if (amount > refs.gallery.childElementCount
         && refs.gallery.childElementCount !== 0) {
         console.log("object ", document.querySelector('li:last-child'));
+        console.log(amount > refs.gallery.childElementCount
+            && refs.gallery.childElementCount !== 0);
         observer.observe(document.querySelector('li:last-child'));
     } else {
-        observer.unobserve(document.querySelector('li:last-child'));
+        observer.disconnect(document.querySelector('li:last-child'));
+        console.log("THAT IS ALL");
         return;
     };
-}
+};
 
 function fetchResults() {
 
@@ -73,8 +70,9 @@ function search(e) {
     e.preventDefault()
     searchBtn.disable();
     const input = e.currentTarget.elements.query;
+    apiService.resetPage();
     clear(refs.gallery);
-    observer.disconnect(refs.gallery);
+
 
     if (isEmptyString(input.value)) {
         clear(input);
