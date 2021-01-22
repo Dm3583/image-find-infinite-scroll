@@ -45,6 +45,7 @@
   "dependencies": {
     "@webpack-cli/init": "^1.1.1",
     "css-loader": "^5.0.1",
+    "debounce": "^1.2.0",
     "handlebars": "^4.7.6",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-preset-env": "^6.7.0",
