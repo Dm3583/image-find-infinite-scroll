@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@webpack-cli/init": "^1.1.1",
+    "basiclightbox": "^5.0.4",
     "css-loader": "^5.0.1",
     "debounce": "^1.2.0",
     "handlebars": "^4.7.6",

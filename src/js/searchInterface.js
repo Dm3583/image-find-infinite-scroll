@@ -2,21 +2,15 @@ import cardTemplate from '../hbsTemplates/card.hbs';
 import ApiService from './apiService';
 import Button from './button';
 import refs from './refs';
+import * as basicLightbox from 'basiclightbox';
 
 const apiService = new ApiService();
-
+console.log(basicLightbox)
 const searchBtn = new Button({
     selector: '.searchBtn',
     label: 'Search',
     labelOnStateChange: 'Searching....'
 });
-
-console.log(document.documentElement.clientWidth);
-console.log(window.screen.width);
-console.log(window.screen.availWidth);
-console.log(window.outerWidth);
-console.log(window.innerWidth);
-console.log(document.documentElement.scrollWidth);
 
 const observer = new IntersectionObserver((entries, observer) => {
 
@@ -69,7 +63,7 @@ function scrollDown(amount) {
 
 function setItemsPerQuery() {
     const width = document.documentElement.scrollWidth;
-    apiService.objPerPage = (width >= 1600) ? 5 : 4;
+    apiService.objPerPage = (width >= 1600) ? 5 : (width >= 1200) ? 4 : (width >= 992) ? 3 : 4;
 };
 
 function fetchResults() {
@@ -102,9 +96,21 @@ function search(e) {
     searchBtn.enable();
 };
 
+
+function showLargeImg(e) {
+    if (e.target.tagName !== "IMG") {
+        return;
+    }
+    const instance = basicLightbox.create(`<img src='${e.target.dataset.largeImg}' width="800" height="600">`);
+    instance.show();
+};
+
+
 searchBtn.enable();
 
 refs.searchForm.addEventListener('submit', search);
+
+refs.gallery.addEventListener('click', showLargeImg);
 
 
 
