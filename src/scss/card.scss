@@ -1,6 +1,5 @@
 .card-item{
-    width: 300px;
-    
+    max-width: 300px;
     margin: 0 auto;
     background-color: #fff;
     padding: 10px;
@@ -38,5 +37,33 @@ img:hover{
 }
 
 .description-text{
+    font-size: 16px;
+}
 
+@media screen and (min-width: 768px) and (max-width: 992px){
+    .card-item{
+        width:50%;
+        max-width: 50%;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .card-item{
+        max-width: 33.3333%;
+        width:33.3333%;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .card-item{
+        max-width: 25%;
+        width:25%;
+    }
+}
+
+@media screen and (min-width: 1600px){
+    .card-item{
+        max-width: 20%;
+        width:20%;
+    }
 }

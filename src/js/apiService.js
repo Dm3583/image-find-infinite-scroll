@@ -5,7 +5,7 @@ export default class ApiService {
     constructor() {
         this._query = '';
         this._page = 1;
-        this._objPerPage = 5;
+        this._objPerPage = 0;
     }
     fetchForQuery() {
         return fetch(`${BASE_URL}?key=${KEY_API}&q=${this._query}&image_type=photo&page=${this.page}&per_page=${this.objPerPage}`)

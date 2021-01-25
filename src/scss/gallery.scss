@@ -1,4 +1,32 @@
 .gallery{
-
+    max-width: 480px;
+    margin: 0 auto;
     padding: 0;
+}
+
+@media screen and (min-width: 768px){
+    .gallery{
+        display: flex;
+        flex-flow:row wrap;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .gallery{
+        max-width: 950px;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .gallery{
+        max-width: 1200px;
+    }
+}
+
+@media screen and (min-width: 1600px){
+    .gallery{
+        max-width: 1600px;
+    }
 }

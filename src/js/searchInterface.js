@@ -11,6 +11,13 @@ const searchBtn = new Button({
     labelOnStateChange: 'Searching....'
 });
 
+console.log(document.documentElement.clientWidth);
+console.log(window.screen.width);
+console.log(window.screen.availWidth);
+console.log(window.outerWidth);
+console.log(window.innerWidth);
+console.log(document.documentElement.scrollWidth);
+
 const observer = new IntersectionObserver((entries, observer) => {
 
     entries.forEach(entry => {
@@ -22,19 +29,22 @@ const observer = new IntersectionObserver((entries, observer) => {
         };
     });
 }, {
-    threshold: 1
+    threshold: 0.01
 });
 
 function isEmptyString(inp) {
+
     return (!inp || inp.match(/\s+/) && !inp.match(/\s+\w+/));
 };
 
 function renderMarkup(template, data) {
+
     const markup = template(data);
     refs.gallery.insertAdjacentHTML('beforeend', markup);
 };
 
 function clear(element) {
+
     element.innerHTML = "";
     if (element.value) {
         element.value = "";
@@ -43,6 +53,7 @@ function clear(element) {
 
 
 function scrollDown(amount) {
+
     if (amount > refs.gallery.childElementCount
         && refs.gallery.childElementCount !== 0) {
         console.log("object ", document.querySelector('li:last-child'));
@@ -56,8 +67,13 @@ function scrollDown(amount) {
     };
 };
 
-function fetchResults() {
+function setItemsPerQuery() {
+    const width = document.documentElement.scrollWidth;
+    apiService.objPerPage = (width >= 1600) ? 5 : 4;
+};
 
+function fetchResults() {
+    setItemsPerQuery();
     apiService.fetchForQuery().then(data => {
         renderMarkup(cardTemplate, data.hits);
         scrollDown(data.totalHits);
@@ -72,7 +88,6 @@ function search(e) {
     const input = e.currentTarget.elements.query;
     apiService.resetPage();
     clear(refs.gallery);
-
 
     if (isEmptyString(input.value)) {
         clear(input);
