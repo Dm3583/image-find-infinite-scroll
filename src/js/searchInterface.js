@@ -3,6 +3,7 @@ import ApiService from './apiService';
 import Button from './button';
 import refs from './refs';
 import * as basicLightbox from 'basiclightbox';
+import notify from './notify';
 
 const apiService = new ApiService();
 console.log(basicLightbox)
@@ -56,28 +57,47 @@ function scrollDown(amount) {
         observer.observe(document.querySelector('li:last-child'));
     } else {
         observer.disconnect(document.querySelector('li:last-child'));
-        console.log("THAT IS ALL");
+        notify.notification('info', 'THAT IS ALL');
         return;
     };
 };
 
 function setItemsPerQuery() {
+
     const width = document.documentElement.scrollWidth;
     apiService.objPerPage = (width >= 1600) ? 5 : (width >= 1200) ? 4 : (width >= 992) ? 3 : 4;
 };
 
+function onError(error) {
+
+    console.log("ERROR " + error)
+    notify.notification('error ', "ERROR " + error);
+};
+
+function showResultsAmount(amount, page) {
+
+    if (page > 2) {
+        return;
+    }
+    notify.notification('info', "Found " + amount + " results");
+};
+
 function fetchResults() {
+
     setItemsPerQuery();
+
     apiService.fetchForQuery().then(data => {
+        showResultsAmount(data.totalHits, apiService.page);
         renderMarkup(cardTemplate, data.hits);
         scrollDown(data.totalHits);
     })
-        .catch(error => console.log("ERROR " + error));
+        .catch(onError);
 };
 
 function search(e) {
 
-    e.preventDefault()
+    e.preventDefault();
+    notify.close();
     searchBtn.disable();
     const input = e.currentTarget.elements.query;
     apiService.resetPage();
@@ -85,6 +105,7 @@ function search(e) {
 
     if (isEmptyString(input.value)) {
         clear(input);
+        notify.notification('alert', "Enter something....");
         searchBtn.enable();
         return;
     };
@@ -93,11 +114,13 @@ function search(e) {
     clear(input);
 
     fetchResults();
+
     searchBtn.enable();
 };
 
 
 function showLargeImg(e) {
+
     if (e.target.tagName !== "IMG") {
         return;
     }
